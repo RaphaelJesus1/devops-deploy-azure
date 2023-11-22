@@ -1,0 +1,27 @@
+name: Deploy To Azure
+
+on:
+  push:
+    branches:
+    - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    
+    - name: Deploy to Azure VM
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        script: |
+          sudo git config --system --add safe.directory '*'
+          cd /home/raphael.jesus/devops-deploy-azure/
+          sudo chmod 777 .
+          sudo chown -R raphael.jesus@acad.espm.br .
+          sudo git pull
+          sudo docker-compose down
