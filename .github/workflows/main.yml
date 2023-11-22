@@ -20,7 +20,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         script: |
           sudo git config --system --add safe.directory '*'
-          cd /home/raphael.jesus/devops-deploy-azure/
+          cd /home/RaphaelJesus1/devops-deploy-azure/
           sudo chmod 777 .
           sudo chown -R raphael.jesus@acad.espm.br .
           sudo git pull
